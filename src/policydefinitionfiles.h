@@ -58,10 +58,6 @@
 
 #include <xsd/cxx/config.hxx>
 
-#if (XSD_INT_VERSION != 4000000L)
-#error XSD runtime version mismatch
-#endif
-
 #include <xsd/cxx/pre.hxx>
 
 #include <xsd/cxx/xml/char-utf8.hxx>

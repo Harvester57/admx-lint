@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM alt:p11@sha256:a32f2a8a3aaa0bde41263bbdf9fd23264fc846feb280f5adb961ab4f34e5f5c5
+FROM alt:p11@sha256:52e8c6c4508284246fc418bce8b67514ab42ed78b4d4fa509320773af3c2b5aa
 
 RUN apt-get update \
 && apt-get install -y cmake rpm-macros-cmake cmake-modules gcc-c++ doxygen libxerces-c-devel rpm-build gear xsd boost-program_options-devel boost-devel\

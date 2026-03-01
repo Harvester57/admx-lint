@@ -19,6 +19,8 @@ BuildRequires: libxerces-c-devel
 BuildRequires: xsd
 BuildRequires: boost-devel
 BuildRequires: boost-program_options-devel
+BuildRequires: libcurl-devel
+BuildRequires: pkgconfig
 
 Source0: %name-%version.tar
 

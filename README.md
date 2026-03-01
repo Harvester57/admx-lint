@@ -31,7 +31,7 @@ Once the dependencies are installed, you can configure and build the project usi
 
 ```bash
 # Clone the repository
-git clone https://github.com/august-alt/admx-lint.git
+git clone https://github.com/Harvester57/admx-lint
 cd admx-lint
 
 # Create a build directory

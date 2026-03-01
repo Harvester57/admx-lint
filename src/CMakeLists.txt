@@ -4,7 +4,7 @@ set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 set(Boost_USE_STATIC_LIBS ON)
 
 find_package(XercesC REQUIRED)
-find_package(Boost 1.40 COMPONENTS program_options REQUIRED)
+find_package(Boost 1.83 COMPONENTS program_options REQUIRED)
 
 # Restore so system libs can be found dynamically
 set(CMAKE_FIND_LIBRARY_SUFFIXES ${ORIG_FIND_LIBRARY_SUFFIXES})

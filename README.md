@@ -22,8 +22,6 @@ sudo apt-get install -y \
     xsdcxx \
     libboost-program-options-dev \
     libcurl4-gnutls-dev \
-    libunistring-dev \
-    libgpg-error-dev \
     libicu-dev
 ```
 
@@ -34,13 +32,8 @@ Once the dependencies are installed, you can configure and build the project usi
 git clone https://github.com/Harvester57/admx-lint
 cd admx-lint
 
-# Create a build directory
-mkdir build
-cd build
-
 # Configure CMake (using CMake 4.x or newer) and build
-cmake ..
-make
+cmake -S . -B build
+cmake --build build
 ```
-
-Upon a successful build, a fully static `admx-lint` executable will be placed in the `src/` directory within your `build/` folder.
+Upon a successful build, the `admx-lint` executable will be placed in the `src/` directory within your `build/` folder.

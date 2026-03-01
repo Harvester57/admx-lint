@@ -1,14 +1,17 @@
 # Prefer static libraries for Xerces and Boost
+set(ORIGINAL_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
 set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 set(Boost_USE_STATIC_LIBS ON)
-set(PKG_CONFIG_USE_STATIC_LIBS ON)
+
+find_package(XercesC REQUIRED)
+find_package(Boost 1.83 COMPONENTS program_options REQUIRED)
+
+# Restore default suffixes for CURL and ICU
+set(CMAKE_FIND_LIBRARY_SUFFIXES ${ORIGINAL_CMAKE_FIND_LIBRARY_SUFFIXES})
 
 find_package(PkgConfig REQUIRED)
 pkg_search_module(CURL REQUIRED IMPORTED_TARGET libcurl)
 pkg_search_module(ICU REQUIRED IMPORTED_TARGET icu-uc icu-i18n)
-
-find_package(XercesC REQUIRED)
-find_package(Boost 1.83 COMPONENTS program_options REQUIRED)
 
 set(HEADERS
     basetypes.h
@@ -31,6 +34,6 @@ install(TARGETS ${PROJECT_NAME} DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRI
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     XercesC::XercesC 
     Boost::program_options
-    ${CURL_STATIC_LDFLAGS}
-    ${ICU_STATIC_LDFLAGS}
+    PkgConfig::CURL
+    PkgConfig::ICU
 )

@@ -644,7 +644,7 @@ namespace GroupPolicy
 namespace GroupPolicy
 {
   /**
-   * @brief C++ namespace for the %http://www.microsoft.com/GroupPolicy/PolicyDefinitions
+   * @brief C++ namespace for the %http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions
    * schema namespace.
    */
   namespace PolicyDefinitions
@@ -7032,7 +7032,7 @@ namespace GroupPolicy
      *
      * @nosubgrouping
      */
-    class MultiTextBox: public ::GroupPolicy::PolicyDefinitions::DataElement
+    class MultiTextBox: public ::GroupPolicy::PolicyDefinitions::DataElementContent
     {
       public:
       /**
@@ -7151,10 +7151,31 @@ namespace GroupPolicy
       //@{
 
       /**
+       * @brief Create an instance from initializers for required 
+       * elements and attributes.
+       */
+      MultiTextBox (const RefIdType&);
+
+      /**
+       * @brief Create an instance from a C string and initializers
+       * for required elements and attributes.
+       */
+      MultiTextBox (const char*,
+                    const RefIdType&);
+
+      /**
+       * @brief Create an instance from a string andinitializers
+       * for required elements and attributes.
+       */
+      MultiTextBox (const ::std::string&,
+                    const RefIdType&);
+
+      /**
        * @brief Create an instance from the ultimate base and
        * initializers for required elements and attributes.
        */
-      MultiTextBox (const RefIdType&);
+      MultiTextBox (const ::xml_schema::String&,
+                    const RefIdType&);
 
       /**
        * @brief Create an instance from a DOM element.
@@ -13355,6 +13376,82 @@ namespace GroupPolicy
       //@}
 
       /**
+       * @name clientExtension
+       *
+       * @brief Accessor and modifier functions for the %clientExtension
+       * optional attribute.
+       */
+      //@{
+
+      /**
+       * @brief Attribute type.
+       */
+      typedef ::GroupPolicy::PolicyDefinitions::GUID ClientExtensionType;
+
+      /**
+       * @brief Attribute optional container type.
+       */
+      typedef ::xsd::cxx::tree::optional< ClientExtensionType > ClientExtensionOptional;
+
+      /**
+       * @brief Attribute traits type.
+       */
+      typedef ::xsd::cxx::tree::traits< ClientExtensionType, char > ClientExtensionTraits;
+
+      /**
+       * @brief Return a read-only (constant) reference to the attribute
+       * container.
+       *
+       * @return A constant reference to the optional container.
+       */
+      const ClientExtensionOptional&
+      clientExtension () const;
+
+      /**
+       * @brief Return a read-write reference to the attribute container.
+       *
+       * @return A reference to the optional container.
+       */
+      ClientExtensionOptional&
+      clientExtension ();
+
+      /**
+       * @brief Set the attribute value.
+       *
+       * @param x A new value to set.
+       *
+       * This function makes a copy of its argument and sets it as
+       * the new value of the attribute.
+       */
+      void
+      clientExtension (const ClientExtensionType& x);
+
+      /**
+       * @brief Set the attribute value.
+       *
+       * @param x An optional container with the new value to set.
+       *
+       * If the value is present in @a x then this function makes a copy 
+       * of this value and sets it as the new value of the attribute.
+       * Otherwise the attribute container is set the 'not present' state.
+       */
+      void
+      clientExtension (const ClientExtensionOptional& x);
+
+      /**
+       * @brief Set the attribute value without copying.
+       *
+       * @param p A new value to use.
+       *
+       * This function will try to use the passed value directly instead
+       * of making a copy.
+       */
+      void
+      clientExtension (::std::unique_ptr< ClientExtensionType > p);
+
+      //@}
+
+      /**
        * @name Constructors
        */
       //@{
@@ -13470,6 +13567,7 @@ namespace GroupPolicy
       PresentationOptional presentation_;
       ::xsd::cxx::tree::one< KeyType > key_;
       ValueNameOptional valueName_;
+      ClientExtensionOptional clientExtension_;
 
       //@endcond
     };
@@ -14808,6 +14906,10 @@ namespace GroupPolicy
        */
       virtual 
       ~String ();
+
+      private:
+      void
+      validate () const;
     };
   }
 }

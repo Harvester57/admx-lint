@@ -93,11 +93,11 @@ int main(int argc, char ** argv)
                 std::cout << "Input format of file: " << input_file_path << " is not supported." << std::endl;
                 return STATUS_FORMAT_NOT_SUPPORTED;
             }
+
+            status_ok = true;
         } else {
             std::cout << "Unable to open file: " << input_file_path << std::endl;
         }
-
-        status_ok = true;
 
         file.close();
     }

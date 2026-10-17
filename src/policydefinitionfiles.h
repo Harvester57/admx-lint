@@ -617,7 +617,7 @@ namespace GroupPolicy
 namespace GroupPolicy
 {
   /**
-   * @brief C++ namespace for the %http://www.microsoft.com/GroupPolicy/PolicyDefinitions
+   * @brief C++ namespace for the %http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions
    * schema namespace.
    */
   namespace PolicyDefinitions

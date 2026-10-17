@@ -547,6 +547,110 @@ namespace xml_schema
   typedef ::xsd::cxx::tree::not_derived< char > NotDerived;
 
   /**
+   * @brief Exception indicating that an unexpected attribute
+   * was encountered.
+   */
+  class UnexpectedAttribute: public ::xsd::cxx::tree::exception< char >
+  {
+    public:
+    UnexpectedAttribute (const ::std::string& name,
+                         const ::std::string& ns)
+    : name_ (name),
+      namespace__ (ns),
+      message_ (ns.empty ()
+                ? "unexpected attribute '" + name + "'"
+                : "unexpected attribute '" + ns + "#" + name + "'")
+    {
+    }
+
+    virtual
+    ~UnexpectedAttribute () noexcept
+    {
+    }
+
+    const ::std::string&
+    name () const
+    {
+      return name_;
+    }
+
+    const ::std::string&
+    namespace_ () const
+    {
+      return namespace__;
+    }
+
+    virtual const char*
+    what () const noexcept
+    {
+      return message_.c_str ();
+    }
+
+    protected:
+    virtual void
+    print (::std::basic_ostream< char >& os) const
+    {
+      os << message_;
+    }
+
+    private:
+    ::std::string name_;
+    ::std::string namespace__;
+    ::std::string message_;
+  };
+
+  /**
+   * @brief Exception indicating that a value violates a schema
+   * facet restriction (pattern or length).
+   */
+  class InvalidFacetValue: public ::xsd::cxx::tree::exception< char >
+  {
+    public:
+    InvalidFacetValue (const ::std::string& type_name,
+                       const ::std::string& value)
+    : type_name_ (type_name),
+      value_ (value),
+      message_ ("invalid value '" + value + "' for type " + type_name)
+    {
+    }
+
+    virtual
+    ~InvalidFacetValue () noexcept
+    {
+    }
+
+    const ::std::string&
+    type_name () const
+    {
+      return type_name_;
+    }
+
+    const ::std::string&
+    value () const
+    {
+      return value_;
+    }
+
+    virtual const char*
+    what () const noexcept
+    {
+      return message_.c_str ();
+    }
+
+    protected:
+    virtual void
+    print (::std::basic_ostream< char >& os) const
+    {
+      os << message_;
+    }
+
+    private:
+    ::std::string type_name_;
+    ::std::string value_;
+    ::std::string message_;
+  };
+
+  /**
    * @brief Error handler callback interface.
    */
   typedef ::xsd::cxx::xml::error_handler< char > ErrorHandler;
@@ -613,7 +717,7 @@ namespace GroupPolicy
 namespace GroupPolicy
 {
   /**
-   * @brief C++ namespace for the %http://www.microsoft.com/GroupPolicy/PolicyDefinitions
+   * @brief C++ namespace for the %http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions
    * schema namespace.
    */
   namespace PolicyDefinitions
@@ -730,6 +834,10 @@ namespace GroupPolicy
        */
       virtual 
       ~GUID ();
+
+      private:
+      void
+      validate () const;
     };
 
     /**
@@ -842,6 +950,10 @@ namespace GroupPolicy
        */
       virtual 
       ~VersionString ();
+
+      private:
+      void
+      validate () const;
     };
 
     /**
@@ -957,6 +1069,10 @@ namespace GroupPolicy
        */
       virtual 
       ~StringReference ();
+
+      private:
+      void
+      validate () const;
     };
 
     /**
@@ -1072,6 +1188,10 @@ namespace GroupPolicy
        */
       virtual 
       ~PresentationReference ();
+
+      private:
+      void
+      validate () const;
     };
 
     /**
@@ -1186,6 +1306,10 @@ namespace GroupPolicy
        */
       virtual 
       ~ResourceID ();
+
+      private:
+      void
+      validate () const;
     };
 
     /**
@@ -1531,6 +1655,10 @@ namespace GroupPolicy
        */
       virtual 
       ~ItemName ();
+
+      private:
+      void
+      validate () const;
     };
 
     /**
@@ -1645,6 +1773,10 @@ namespace GroupPolicy
        */
       virtual 
       ~ItemReference ();
+
+      private:
+      void
+      validate () const;
     };
 
     /**

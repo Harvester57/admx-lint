@@ -861,7 +861,7 @@ namespace GroupPolicy
     {
       if ((f & ::xml_schema::Flags::base) == 0)
       {
-        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, true);
         this->parse (p, f);
       }
     }
@@ -880,11 +880,11 @@ namespace GroupPolicy
         //
         if (n.name () == "stringTable" && n.namespace_ () == "http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions")
         {
-          ::std::unique_ptr< StringTableType > r (
-            StringTableTraits::create (i, f, this));
-
-          if (!this->stringTable_)
+          if (!this->stringTable_ && !this->presentationTable_)
           {
+            ::std::unique_ptr< StringTableType > r (
+              StringTableTraits::create (i, f, this));
+
             this->stringTable_.set (::std::move (r));
             continue;
           }
@@ -894,17 +894,40 @@ namespace GroupPolicy
         //
         if (n.name () == "presentationTable" && n.namespace_ () == "http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions")
         {
-          ::std::unique_ptr< PresentationTableType > r (
-            PresentationTableTraits::create (i, f, this));
-
           if (!this->presentationTable_)
           {
+            ::std::unique_ptr< PresentationTableType > r (
+              PresentationTableTraits::create (i, f, this));
+
             this->presentationTable_.set (::std::move (r));
             continue;
           }
         }
 
         break;
+      }
+
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
+      }
+
+      while (p.more_attributes ())
+      {
+        const ::xercesc::DOMAttr& i (p.next_attribute ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
     }
 
@@ -987,6 +1010,10 @@ namespace GroupPolicy
           this->fileName_.set (FileNameTraits::create (i, f, this));
           continue;
         }
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
 
       if (!fileName_.present ())
@@ -1055,7 +1082,7 @@ namespace GroupPolicy
     {
       if ((f & ::xml_schema::Flags::base) == 0)
       {
-        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, true);
         this->parse (p, f);
       }
     }
@@ -1096,6 +1123,29 @@ namespace GroupPolicy
         }
 
         break;
+      }
+
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
+      }
+
+      while (p.more_attributes ())
+      {
+        const ::xercesc::DOMAttr& i (p.next_attribute ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
     }
 
@@ -1160,7 +1210,7 @@ namespace GroupPolicy
     {
       if ((f & ::xml_schema::Flags::base) == 0)
       {
-        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, true);
         this->parse (p, f);
       }
     }
@@ -1177,6 +1227,7 @@ namespace GroupPolicy
 
         // products
         //
+        if (!this->products_ && !this->definitions_)
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1187,24 +1238,22 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!this->products_)
-            {
-              ::std::unique_ptr< ProductsType > r (
-                dynamic_cast< ProductsType* > (tmp.get ()));
+            ::std::unique_ptr< ProductsType > r (
+              dynamic_cast< ProductsType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->products_.set (::std::move (r));
-              continue;
-            }
+            this->products_.set (::std::move (r));
+            continue;
           }
         }
 
         // definitions
         //
+        if (!this->definitions_)
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1215,23 +1264,43 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!this->definitions_)
-            {
-              ::std::unique_ptr< DefinitionsType > r (
-                dynamic_cast< DefinitionsType* > (tmp.get ()));
+            ::std::unique_ptr< DefinitionsType > r (
+              dynamic_cast< DefinitionsType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->definitions_.set (::std::move (r));
-              continue;
-            }
+            this->definitions_.set (::std::move (r));
+            continue;
           }
         }
 
         break;
+      }
+
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
+      }
+
+      while (p.more_attributes ())
+      {
+        const ::xercesc::DOMAttr& i (p.next_attribute ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
     }
 
@@ -1294,7 +1363,7 @@ namespace GroupPolicy
     {
       if ((f & ::xml_schema::Flags::base) == 0)
       {
-        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, true);
         this->parse (p, f);
       }
     }
@@ -1335,6 +1404,29 @@ namespace GroupPolicy
         }
 
         break;
+      }
+
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
+      }
+
+      while (p.more_attributes ())
+      {
+        const ::xercesc::DOMAttr& i (p.next_attribute ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
     }
 
@@ -1426,6 +1518,10 @@ namespace GroupPolicy
           this->namespace__.set (NamespaceTraits::create (i, f, this));
           continue;
         }
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
 
       if (!prefix_.present ())
@@ -1513,7 +1609,7 @@ namespace GroupPolicy
     {
       if ((f & ::xml_schema::Flags::base) == 0)
       {
-        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, true);
         this->parse (p, f);
       }
     }
@@ -1530,6 +1626,7 @@ namespace GroupPolicy
 
         // target
         //
+        if (!target_.present () && this->using__.empty ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1540,24 +1637,22 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!target_.present ())
-            {
-              ::std::unique_ptr< TargetType > r (
-                dynamic_cast< TargetType* > (tmp.get ()));
+            ::std::unique_ptr< TargetType > r (
+              dynamic_cast< TargetType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->target_.set (::std::move (r));
-              continue;
-            }
+            this->target_.set (::std::move (r));
+            continue;
           }
         }
 
         // using
         //
+        if (target_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1584,11 +1679,34 @@ namespace GroupPolicy
         break;
       }
 
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
+      }
+
       if (!target_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
           "target",
           "http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions");
+      }
+
+      while (p.more_attributes ())
+      {
+        const ::xercesc::DOMAttr& i (p.next_attribute ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
     }
 
@@ -1683,6 +1801,10 @@ namespace GroupPolicy
           this->fallbackCulture_.set (FallbackCultureTraits::create (i, f, this));
           continue;
         }
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
 
       if (!minRequiredRevision_.present ())
@@ -1819,6 +1941,7 @@ namespace GroupPolicy
 
         // policyNamespaces
         //
+        if (!policyNamespaces_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1829,24 +1952,22 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!policyNamespaces_.present ())
-            {
-              ::std::unique_ptr< PolicyNamespacesType > r (
-                dynamic_cast< PolicyNamespacesType* > (tmp.get ()));
+            ::std::unique_ptr< PolicyNamespacesType > r (
+              dynamic_cast< PolicyNamespacesType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->policyNamespaces_.set (::std::move (r));
-              continue;
-            }
+            this->policyNamespaces_.set (::std::move (r));
+            continue;
           }
         }
 
         // supersededAdm
         //
+        if (policyNamespaces_.present () && this->annotation_.empty () && !resources_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1872,6 +1993,7 @@ namespace GroupPolicy
 
         // annotation
         //
+        if (policyNamespaces_.present () && !resources_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1897,6 +2019,7 @@ namespace GroupPolicy
 
         // resources
         //
+        if (policyNamespaces_.present () && !resources_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1907,24 +2030,22 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!resources_.present ())
-            {
-              ::std::unique_ptr< ResourcesType > r (
-                dynamic_cast< ResourcesType* > (tmp.get ()));
+            ::std::unique_ptr< ResourcesType > r (
+              dynamic_cast< ResourcesType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->resources_.set (::std::move (r));
-              continue;
-            }
+            this->resources_.set (::std::move (r));
+            continue;
           }
         }
 
         // supportedOn
         //
+        if (resources_.present () && !this->supportedOn_ && !this->categories_ && !this->policies_)
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1935,24 +2056,22 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!this->supportedOn_)
-            {
-              ::std::unique_ptr< SupportedOnType > r (
-                dynamic_cast< SupportedOnType* > (tmp.get ()));
+            ::std::unique_ptr< SupportedOnType > r (
+              dynamic_cast< SupportedOnType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->supportedOn_.set (::std::move (r));
-              continue;
-            }
+            this->supportedOn_.set (::std::move (r));
+            continue;
           }
         }
 
         // categories
         //
+        if (resources_.present () && !this->categories_ && !this->policies_)
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1963,24 +2082,22 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!this->categories_)
-            {
-              ::std::unique_ptr< CategoriesType > r (
-                dynamic_cast< CategoriesType* > (tmp.get ()));
+            ::std::unique_ptr< CategoriesType > r (
+              dynamic_cast< CategoriesType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->categories_.set (::std::move (r));
-              continue;
-            }
+            this->categories_.set (::std::move (r));
+            continue;
           }
         }
 
         // policies
         //
+        if (resources_.present () && !this->policies_)
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -1991,23 +2108,32 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!this->policies_)
-            {
-              ::std::unique_ptr< PoliciesType > r (
-                dynamic_cast< PoliciesType* > (tmp.get ()));
+            ::std::unique_ptr< PoliciesType > r (
+              dynamic_cast< PoliciesType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->policies_.set (::std::move (r));
-              continue;
-            }
+            this->policies_.set (::std::move (r));
+            continue;
           }
         }
 
         break;
+      }
+
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
       }
 
       if (!policyNamespaces_.present ())
@@ -2041,6 +2167,10 @@ namespace GroupPolicy
           this->schemaVersion_.set (SchemaVersionTraits::create (i, f, this));
           continue;
         }
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
 
       if (!revision_.present ())
@@ -2192,6 +2322,7 @@ namespace GroupPolicy
 
         // displayName
         //
+        if (!displayName_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -2202,24 +2333,22 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!displayName_.present ())
-            {
-              ::std::unique_ptr< DisplayNameType > r (
-                dynamic_cast< DisplayNameType* > (tmp.get ()));
+            ::std::unique_ptr< DisplayNameType > r (
+              dynamic_cast< DisplayNameType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->displayName_.set (::std::move (r));
-              continue;
-            }
+            this->displayName_.set (::std::move (r));
+            continue;
           }
         }
 
         // description
         //
+        if (displayName_.present () && !description_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -2230,24 +2359,22 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!description_.present ())
-            {
-              ::std::unique_ptr< DescriptionType > r (
-                dynamic_cast< DescriptionType* > (tmp.get ()));
+            ::std::unique_ptr< DescriptionType > r (
+              dynamic_cast< DescriptionType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->description_.set (::std::move (r));
-              continue;
-            }
+            this->description_.set (::std::move (r));
+            continue;
           }
         }
 
         // annotation
         //
+        if (description_.present () && !resources_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -2273,6 +2400,7 @@ namespace GroupPolicy
 
         // resources
         //
+        if (description_.present () && !resources_.present ())
         {
           ::std::unique_ptr< ::xsd::cxx::tree::type > tmp (
             ::xsd::cxx::tree::type_factory_map_instance< 0, char > ().create (
@@ -2283,23 +2411,32 @@ namespace GroupPolicy
 
           if (tmp.get () != 0)
           {
-            if (!resources_.present ())
-            {
-              ::std::unique_ptr< ResourcesType > r (
-                dynamic_cast< ResourcesType* > (tmp.get ()));
+            ::std::unique_ptr< ResourcesType > r (
+              dynamic_cast< ResourcesType* > (tmp.get ()));
 
-              if (r.get ())
-                tmp.release ();
-              else
-                throw ::xsd::cxx::tree::not_derived< char > ();
+            if (r.get ())
+              tmp.release ();
+            else
+              throw ::xsd::cxx::tree::not_derived< char > ();
 
-              this->resources_.set (::std::move (r));
-              continue;
-            }
+            this->resources_.set (::std::move (r));
+            continue;
           }
         }
 
         break;
+      }
+
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
       }
 
       if (!displayName_.present ())
@@ -2340,6 +2477,10 @@ namespace GroupPolicy
           this->schemaVersion_.set (SchemaVersionTraits::create (i, f, this));
           continue;
         }
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
 
       if (!revision_.present ())
@@ -2420,7 +2561,7 @@ namespace GroupPolicy
     {
       if ((f & ::xml_schema::Flags::base) == 0)
       {
-        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, true);
         this->parse (p, f);
       }
     }
@@ -2461,6 +2602,36 @@ namespace GroupPolicy
         }
 
         break;
+      }
+
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
+      }
+
+      if (this->string_.empty ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "string",
+          "http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions");
+      }
+
+      while (p.more_attributes ())
+      {
+        const ::xercesc::DOMAttr& i (p.next_attribute ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
     }
 
@@ -2516,7 +2687,7 @@ namespace GroupPolicy
     {
       if ((f & ::xml_schema::Flags::base) == 0)
       {
-        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+        ::xsd::cxx::xml::dom::parser< char > p (e, true, false, true);
         this->parse (p, f);
       }
     }
@@ -2557,6 +2728,36 @@ namespace GroupPolicy
         }
 
         break;
+      }
+
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element < char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
+      }
+
+      if (this->presentation_.empty ())
+      {
+        throw ::xsd::cxx::tree::expected_element< char > (
+          "presentation",
+          "http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions");
+      }
+
+      while (p.more_attributes ())
+      {
+        const ::xercesc::DOMAttr& i (p.next_attribute ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
     }
 

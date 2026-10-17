@@ -183,6 +183,8 @@ namespace GroupPolicy
 
 #include <xsd/cxx/tree/type-factory-map.hxx>
 
+#include <xercesc/util/regx/RegularExpression.hpp>
+
 namespace _xsd
 {
   static
@@ -235,6 +237,7 @@ namespace GroupPolicy
           ::xml_schema::Container* c)
     : ::xml_schema::String (e, f, c)
     {
+      this->validate ();
     }
 
     GUID::
@@ -243,6 +246,7 @@ namespace GroupPolicy
           ::xml_schema::Container* c)
     : ::xml_schema::String (a, f, c)
     {
+      this->validate ();
     }
 
     GUID::
@@ -252,6 +256,22 @@ namespace GroupPolicy
           ::xml_schema::Container* c)
     : ::xml_schema::String (s, e, f, c)
     {
+      this->validate ();
+    }
+
+    void GUID::
+    validate () const
+    {
+      static const ::xercesc::RegularExpression re (
+        "\\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\\}",
+        "X");
+      if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
+      {
+        throw ::xml_schema::InvalidFacetValue (
+          "GUID",
+          *this,
+          "pattern '{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}}'");
+      }
     }
 
     GUID* GUID::
@@ -313,6 +333,7 @@ namespace GroupPolicy
                    ::xml_schema::Container* c)
     : ::xml_schema::Token (e, f, c)
     {
+      this->validate ();
     }
 
     VersionString::
@@ -321,6 +342,7 @@ namespace GroupPolicy
                    ::xml_schema::Container* c)
     : ::xml_schema::Token (a, f, c)
     {
+      this->validate ();
     }
 
     VersionString::
@@ -330,6 +352,22 @@ namespace GroupPolicy
                    ::xml_schema::Container* c)
     : ::xml_schema::Token (s, e, f, c)
     {
+      this->validate ();
+    }
+
+    void VersionString::
+    validate () const
+    {
+      static const ::xercesc::RegularExpression re (
+        "[0-9]{1,4}\\.[0-9]{1,5}",
+        "X");
+      if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
+      {
+        throw ::xml_schema::InvalidFacetValue (
+          "versionString",
+          *this,
+          "pattern '[0-9]{1,4}\\.[0-9]{1,5}'");
+      }
     }
 
     VersionString* VersionString::
@@ -391,6 +429,7 @@ namespace GroupPolicy
                      ::xml_schema::Container* c)
     : ::xml_schema::String (e, f, c)
     {
+      this->validate ();
     }
 
     StringReference::
@@ -399,6 +438,7 @@ namespace GroupPolicy
                      ::xml_schema::Container* c)
     : ::xml_schema::String (a, f, c)
     {
+      this->validate ();
     }
 
     StringReference::
@@ -408,6 +448,22 @@ namespace GroupPolicy
                      ::xml_schema::Container* c)
     : ::xml_schema::String (s, e, f, c)
     {
+      this->validate ();
+    }
+
+    void StringReference::
+    validate () const
+    {
+      static const ::xercesc::RegularExpression re (
+        "\\$\\(string\\.(\\p{L}|\\p{N}|_)+\\)",
+        "X");
+      if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
+      {
+        throw ::xml_schema::InvalidFacetValue (
+          "stringReference",
+          *this,
+          "pattern '\\$\\(string\\.(\\p{L}|\\p{N}|_)+\\)'");
+      }
     }
 
     StringReference* StringReference::
@@ -469,6 +525,7 @@ namespace GroupPolicy
                            ::xml_schema::Container* c)
     : ::xml_schema::String (e, f, c)
     {
+      this->validate ();
     }
 
     PresentationReference::
@@ -477,6 +534,7 @@ namespace GroupPolicy
                            ::xml_schema::Container* c)
     : ::xml_schema::String (a, f, c)
     {
+      this->validate ();
     }
 
     PresentationReference::
@@ -486,6 +544,22 @@ namespace GroupPolicy
                            ::xml_schema::Container* c)
     : ::xml_schema::String (s, e, f, c)
     {
+      this->validate ();
+    }
+
+    void PresentationReference::
+    validate () const
+    {
+      static const ::xercesc::RegularExpression re (
+        "\\$\\(presentation\\.(\\p{L}|\\p{N}|_)+\\)",
+        "X");
+      if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
+      {
+        throw ::xml_schema::InvalidFacetValue (
+          "presentationReference",
+          *this,
+          "pattern '\\$\\(presentation\\.(\\p{L}|\\p{N}|_)+\\)'");
+      }
     }
 
     PresentationReference* PresentationReference::
@@ -547,6 +621,7 @@ namespace GroupPolicy
                 ::xml_schema::Container* c)
     : ::xml_schema::String (e, f, c)
     {
+      this->validate ();
     }
 
     ResourceID::
@@ -555,6 +630,7 @@ namespace GroupPolicy
                 ::xml_schema::Container* c)
     : ::xml_schema::String (a, f, c)
     {
+      this->validate ();
     }
 
     ResourceID::
@@ -564,6 +640,22 @@ namespace GroupPolicy
                 ::xml_schema::Container* c)
     : ::xml_schema::String (s, e, f, c)
     {
+      this->validate ();
+    }
+
+    void ResourceID::
+    validate () const
+    {
+      static const ::xercesc::RegularExpression re (
+        "(\\p{L}|\\p{N}|_)+",
+        "X");
+      if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
+      {
+        throw ::xml_schema::InvalidFacetValue (
+          "resourceID",
+          *this,
+          "pattern '(\\p{L}|\\p{N}|_)+'");
+      }
     }
 
     ResourceID* ResourceID::
@@ -652,6 +744,18 @@ namespace GroupPolicy
         break;
       }
 
+      if (p.more_content ())
+      {
+        const ::xercesc::DOMElement& i (p.cur_element ());
+        const ::xsd::cxx::xml::qualified_name< char > n (
+          ::xsd::cxx::xml::dom::name< char > (i));
+        throw ::xsd::cxx::tree::unexpected_element< char > (
+          n.name (),
+          n.namespace_ (),
+          "",
+          "");
+      }
+
       if (!any_.present ())
       {
         throw ::xsd::cxx::tree::expected_element< char > (
@@ -670,6 +774,10 @@ namespace GroupPolicy
           this->application_.set (ApplicationTraits::create (i, f, this));
           continue;
         }
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
 
       if (!application_.present ())
@@ -752,6 +860,7 @@ namespace GroupPolicy
               ::xml_schema::Container* c)
     : ::xml_schema::String (e, f, c)
     {
+      this->validate ();
     }
 
     ItemName::
@@ -760,6 +869,7 @@ namespace GroupPolicy
               ::xml_schema::Container* c)
     : ::xml_schema::String (a, f, c)
     {
+      this->validate ();
     }
 
     ItemName::
@@ -769,6 +879,22 @@ namespace GroupPolicy
               ::xml_schema::Container* c)
     : ::xml_schema::String (s, e, f, c)
     {
+      this->validate ();
+    }
+
+    void ItemName::
+    validate () const
+    {
+      static const ::xercesc::RegularExpression re (
+        "(\\p{L}|\\p{N}|_)+",
+        "X");
+      if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
+      {
+        throw ::xml_schema::InvalidFacetValue (
+          "itemName",
+          *this,
+          "pattern '(\\p{L}|\\p{N}|_)+'");
+      }
     }
 
     ItemName* ItemName::
@@ -830,6 +956,7 @@ namespace GroupPolicy
                    ::xml_schema::Container* c)
     : ::xml_schema::String (e, f, c)
     {
+      this->validate ();
     }
 
     ItemReference::
@@ -838,6 +965,7 @@ namespace GroupPolicy
                    ::xml_schema::Container* c)
     : ::xml_schema::String (a, f, c)
     {
+      this->validate ();
     }
 
     ItemReference::
@@ -847,6 +975,22 @@ namespace GroupPolicy
                    ::xml_schema::Container* c)
     : ::xml_schema::String (s, e, f, c)
     {
+      this->validate ();
+    }
+
+    void ItemReference::
+    validate () const
+    {
+      static const ::xercesc::RegularExpression re (
+        "((\\p{L}|\\p{N}|_)+)|((\\p{L}|\\p{N}|_)+:(\\p{L}|\\p{N}|_)+)",
+        "X");
+      if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
+      {
+        throw ::xml_schema::InvalidFacetValue (
+          "itemReference",
+          *this,
+          "pattern '((\\p{L}|\\p{N}|_)+)|((\\p{L}|\\p{N}|_)+:(\\p{L}|\\p{N}|_)+)'");
+      }
     }
 
     ItemReference* ItemReference::
@@ -939,6 +1083,10 @@ namespace GroupPolicy
           this->id_.set (IdTraits::create (i, f, this));
           continue;
         }
+
+        throw ::xml_schema::UnexpectedAttribute (
+          n.name (),
+          n.namespace_ ());
       }
 
       if (!id_.present ())

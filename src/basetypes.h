@@ -607,10 +607,14 @@ namespace xml_schema
   {
     public:
     InvalidFacetValue (const ::std::string& type_name,
-                       const ::std::string& value)
+                       const ::std::string& value,
+                       const ::std::string& facet = "")
     : type_name_ (type_name),
       value_ (value),
-      message_ ("invalid value '" + value + "' for type " + type_name)
+      facet_ (facet),
+      message_ (facet.empty ()
+                ? "invalid value '" + value + "' for type " + type_name
+                : "invalid value '" + value + "' for type " + type_name + " (" + facet + ")")
     {
     }
 
@@ -631,6 +635,12 @@ namespace xml_schema
       return value_;
     }
 
+    const ::std::string&
+    facet () const
+    {
+      return facet_;
+    }
+
     virtual const char*
     what () const noexcept
     {
@@ -647,6 +657,7 @@ namespace xml_schema
     private:
     ::std::string type_name_;
     ::std::string value_;
+    ::std::string facet_;
     ::std::string message_;
   };
 

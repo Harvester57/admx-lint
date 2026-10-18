@@ -262,7 +262,7 @@ namespace GroupPolicy
     void GUID::
     validate () const
     {
-      static const ::xercesc::RegularExpression re (
+      const ::xercesc::RegularExpression re (
         "\\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\\}",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
@@ -358,7 +358,7 @@ namespace GroupPolicy
     void VersionString::
     validate () const
     {
-      static const ::xercesc::RegularExpression re (
+      const ::xercesc::RegularExpression re (
         "[0-9]{1,4}\\.[0-9]{1,5}",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
@@ -454,7 +454,7 @@ namespace GroupPolicy
     void StringReference::
     validate () const
     {
-      static const ::xercesc::RegularExpression re (
+      const ::xercesc::RegularExpression re (
         "\\$\\(string\\.(\\p{L}|\\p{N}|_)+\\)",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
@@ -550,7 +550,7 @@ namespace GroupPolicy
     void PresentationReference::
     validate () const
     {
-      static const ::xercesc::RegularExpression re (
+      const ::xercesc::RegularExpression re (
         "\\$\\(presentation\\.(\\p{L}|\\p{N}|_)+\\)",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
@@ -646,7 +646,7 @@ namespace GroupPolicy
     void ResourceID::
     validate () const
     {
-      static const ::xercesc::RegularExpression re (
+      const ::xercesc::RegularExpression re (
         "(\\p{L}|\\p{N}|_)+",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
@@ -775,6 +775,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -885,7 +889,7 @@ namespace GroupPolicy
     void ItemName::
     validate () const
     {
-      static const ::xercesc::RegularExpression re (
+      const ::xercesc::RegularExpression re (
         "(\\p{L}|\\p{N}|_)+",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
@@ -981,7 +985,7 @@ namespace GroupPolicy
     void ItemReference::
     validate () const
     {
-      static const ::xercesc::RegularExpression re (
+      const ::xercesc::RegularExpression re (
         "((\\p{L}|\\p{N}|_)+)|((\\p{L}|\\p{N}|_)+:(\\p{L}|\\p{N}|_)+)",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
@@ -1083,6 +1087,10 @@ namespace GroupPolicy
           this->id_.set (IdTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),

@@ -4198,6 +4198,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -4394,6 +4398,10 @@ namespace GroupPolicy
           this->soft_.set (SoftTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -4684,6 +4692,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -4845,6 +4857,10 @@ namespace GroupPolicy
           this->soft_.set (SoftTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -5043,6 +5059,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -5198,6 +5218,10 @@ namespace GroupPolicy
           this->explicitValue_.set (ExplicitValueTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -5399,6 +5423,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -5542,6 +5570,10 @@ namespace GroupPolicy
           this->defaultKey_.set (DefaultKeyTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -5708,6 +5740,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -5865,6 +5901,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -6008,6 +6048,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -6086,6 +6130,10 @@ namespace GroupPolicy
           this->refId_.set (RefIdTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -6222,6 +6270,10 @@ namespace GroupPolicy
           this->spinStep_.set (SpinStepTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -6388,6 +6440,10 @@ namespace GroupPolicy
           this->spinStep_.set (SpinStepTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -6707,6 +6763,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -6842,6 +6902,10 @@ namespace GroupPolicy
           this->defaultChecked_.set (DefaultCheckedTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -7068,6 +7132,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
 
@@ -7210,6 +7278,10 @@ namespace GroupPolicy
           this->defaultItem_.set (DefaultItemTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -7644,6 +7716,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
 
@@ -7742,6 +7818,10 @@ namespace GroupPolicy
           this->ref_.set (RefTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -7986,6 +8066,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
 
@@ -8133,6 +8217,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
     }
@@ -8271,6 +8359,10 @@ namespace GroupPolicy
           this->displayName_.set (DisplayNameTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -8437,6 +8529,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
 
@@ -8564,6 +8660,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
 
@@ -8669,6 +8769,10 @@ namespace GroupPolicy
           this->ref_.set (RefTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -8777,6 +8881,10 @@ namespace GroupPolicy
           this->maxVersionIndex_.set (MaxVersionIndexTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -8942,6 +9050,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
     }
@@ -9097,6 +9209,10 @@ namespace GroupPolicy
         const ::xercesc::DOMAttr& i (p.next_attribute ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -9268,6 +9384,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
 
@@ -9411,6 +9531,10 @@ namespace GroupPolicy
         const ::xercesc::DOMAttr& i (p.next_attribute ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -9983,6 +10107,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
 
@@ -10325,6 +10453,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
     }
@@ -10508,6 +10640,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
 
@@ -10584,6 +10720,10 @@ namespace GroupPolicy
           const ::xercesc::DOMAttr& i (p.next_attribute ());
           const ::xsd::cxx::xml::qualified_name< char > n (
             ::xsd::cxx::xml::dom::name< char > (i));
+          if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+              n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+            continue;
+
           throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
         }
       }
@@ -10666,6 +10806,10 @@ namespace GroupPolicy
           this->value_.set (ValueTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }
@@ -10750,6 +10894,10 @@ namespace GroupPolicy
           this->value_.set (ValueTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (n.name (), n.namespace_ ());
       }

@@ -925,6 +925,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -1010,6 +1014,10 @@ namespace GroupPolicy
           this->fileName_.set (FileNameTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -1142,6 +1150,10 @@ namespace GroupPolicy
         const ::xercesc::DOMAttr& i (p.next_attribute ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -1298,6 +1310,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -1424,6 +1440,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -1518,6 +1538,10 @@ namespace GroupPolicy
           this->namespace__.set (NamespaceTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -1704,6 +1728,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -1801,6 +1829,10 @@ namespace GroupPolicy
           this->fallbackCulture_.set (FallbackCultureTraits::create (i, f, this));
           continue;
         }
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
@@ -2168,6 +2200,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -2478,6 +2514,10 @@ namespace GroupPolicy
           continue;
         }
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -2629,6 +2669,10 @@ namespace GroupPolicy
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
 
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
+
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),
           n.namespace_ ());
@@ -2754,6 +2798,10 @@ namespace GroupPolicy
         const ::xercesc::DOMAttr& i (p.next_attribute ());
         const ::xsd::cxx::xml::qualified_name< char > n (
           ::xsd::cxx::xml::dom::name< char > (i));
+
+        if (n.namespace_ () == "http://www.w3.org/2000/xmlns/" ||
+            n.namespace_ () == "http://www.w3.org/2001/XMLSchema-instance")
+          continue;
 
         throw ::xml_schema::UnexpectedAttribute (
           n.name (),

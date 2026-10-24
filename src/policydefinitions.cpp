@@ -11006,8 +11006,8 @@ namespace GroupPolicy
         if ((c & 0xC0) != 0x80)
           ++count;
       }
-      if (count > 255)
-        throw ::xml_schema::InvalidFacetValue ("string", *this, "maxLength '255'");
+      if (count > 1023)
+        throw ::xml_schema::InvalidFacetValue ("string", *this, "maxLength '1023'");
     }
 
     String* String::

@@ -455,7 +455,7 @@ namespace GroupPolicy
     validate () const
     {
       const ::xercesc::RegularExpression re (
-        "\\$\\(string\\.(\\p{L}|\\p{N}|_)+\\)",
+        "$\\(string\\.(\\p{L}|\\p{N}|_)+\\)",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
       {
@@ -551,7 +551,7 @@ namespace GroupPolicy
     validate () const
     {
       const ::xercesc::RegularExpression re (
-        "\\$\\(presentation\\.(\\p{L}|\\p{N}|_)+\\)",
+        "$\\(presentation\\.(\\p{L}|\\p{N}|_)+\\)",
         "X");
       if (!re.matches (::xsd::cxx::xml::string (*this).c_str ()))
       {
